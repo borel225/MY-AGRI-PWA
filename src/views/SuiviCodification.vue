@@ -115,11 +115,7 @@
               </label>
             </div>
           </div>
-          <div v-if="!form.kycValide" class="form-group mt-2">
-            <label>Motif non-conformité</label>
-            <input type="text" v-model="form.motifNonConformite" class="form-input" />
-          </div>
-          <select v-model="form.motifNonConformite" class="form-select">
+          <select v-if="!form.kycValide" v-model="form.motifNonConformite" class="form-select">
                 <option value="">Sélectionner un motif</option>
                 <option value="MOT1">Dfe incomplet ou illisible</option>
                 <option value="MOT2">Registre de commerce incomplet ou illisible</option>

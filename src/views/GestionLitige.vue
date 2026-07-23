@@ -11,7 +11,7 @@
       <form @submit.prevent="save">
         <!-- Section 1: Contexte -->
         <div class="form-section">
-          <h2>Contexte</h2>
+          <h2>Information ancien producteur</h2>
           <div class="form-grid">
             <div class="form-group">
               <label>Mission</label>
@@ -80,38 +80,46 @@
         <!-- Section 4: Ayants-droit -->
         <div class="form-section">
           <h2>Ayants-droit</h2>
-          <div class="dynamic-table-wrapper">
-            <table class="dynamic-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nom & Prénoms</th>
-                  <th>Date naissance</th>
-                  <th>Lieu naissance</th>
-                  <th>Contact</th>
-                  <th>N° Pièce</th>
-                  <th>Superficie obtenue (ha)</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(ayantDroit, index) in ayantsDroit" :key="index">
-                  <td>{{ index + 1 }}</td>
-                  <td><input type="text" v-model="ayantDroit.nomPrenom" class="form-input" /></td>
-                  <td><input type="date" v-model="ayantDroit.dateNaissance" class="form-input" /></td>
-                  <td><input type="text" v-model="ayantDroit.lieuNaissance" class="form-input" /></td>
-                  <td><input type="tel" v-model="ayantDroit.contact" class="form-input" /></td>
-                  <td><input type="text" v-model="ayantDroit.piece" class="form-input" /></td>
-                  <td><input type="number" step="0.01" v-model="ayantDroit.superficie" class="form-input" /></td>
-                  <td>
-                    <button type="button" @click="removeAyantDroit(index)" class="btn btn-danger" title="Supprimer">
-                      <span class="material-icons-outlined">delete</span>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+
+          <div v-if="ayantsDroit.length === 0" class="empty-message">
+            Aucun ayant-droit ajouté pour le moment.
           </div>
+
+          <div v-for="(ayantDroit, index) in ayantsDroit" :key="index" class="ayant-droit-card">
+            <div class="ayant-droit-card-header">
+              <span class="ayant-droit-number">Ayant-droit {{ index + 1 }}</span>
+              <button type="button" @click="removeAyantDroit(index)" class="btn btn-danger btn-sm" title="Supprimer">
+                <span class="material-icons-outlined">delete</span>
+              </button>
+            </div>
+            <div class="form-grid cols-2">
+              <div class="form-group">
+                <label>Nom & Prénoms</label>
+                <input type="text" v-model="ayantDroit.nomPrenom" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label>Date naissance</label>
+                <input type="date" v-model="ayantDroit.dateNaissance" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label>Lieu naissance</label>
+                <input type="text" v-model="ayantDroit.lieuNaissance" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label>Contact</label>
+                <input type="tel" v-model="ayantDroit.contact" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label>N° Pièce</label>
+                <input type="text" v-model="ayantDroit.piece" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label>Superficie obtenue (ha)</label>
+                <input type="number" step="0.01" v-model="ayantDroit.superficie" class="form-input" />
+              </div>
+            </div>
+          </div>
+
           <button type="button" @click="addAyantDroit" class="btn btn-secondary mt-2">
             <span class="material-icons-outlined">add</span> Ajouter un ayant-droit
           </button>

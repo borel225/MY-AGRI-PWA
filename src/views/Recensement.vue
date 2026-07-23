@@ -4,7 +4,7 @@
       <router-link to="/" class="btn btn-secondary">
         <span class="material-icons-outlined">arrow_back</span> Retour
       </router-link>
-      <h1>Recensement</h1>
+      <h1>Recensement d'un nouveau producteur</h1>
     </header>
 
     <div class="form-container">
@@ -21,8 +21,8 @@
               </select>
             </div>
             <div class="form-group">
-              <label>Date mission</label>
-              <input type="date" v-model="form.dateMission" class="form-input" readonly />
+              <label>Date </label>
+              <input type="date" v-model="form.dateRecensement" class="form-input" readonly />
             </div>
             <div class="form-group">
               <label>Localité</label>
@@ -69,12 +69,16 @@
           <h2>Résumé Parcelles</h2>
           <div class="form-grid">
             <div class="form-group">
-              <label>Nb parcelles déclarées</label>
+              <label>Nombre parcelles déclarées</label>
               <input type="number" v-model="form.nbParcellesDeclarees" class="form-input" />
             </div>
             <div class="form-group">
-              <label>Nb parcelles géolocalisées</label>
-              <input type="number" v-model="form.nbParcellesGeolocalisees" class="form-input" />
+              <label>Nombre parcelles levées</label>
+              <input type="number" v-model="form.nbParcellesLevees" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label>Nombre parcelles restant à leve</label>
+              <input type="number" v-model="form.nbParcellesRestantLevees" class="form-input" />
             </div>
           </div>
         </div>
@@ -128,7 +132,7 @@ import { reactive, ref } from 'vue';
 
 const form = reactive({
   mission: '',
-  dateMission: '',
+  dateRecensement: '',
   localite: '',
   agent: '',
   codeProducteur: '',
@@ -136,7 +140,8 @@ const form = reactive({
   contact: '',
   pieceIdentite: '',
   nbParcellesDeclarees: 0,
-  nbParcellesGeolocalisees: 0
+  nbParcellesRestantLevees: 0,
+  nbParcellesLevees : 0
 });
 
 const parcelles = ref([]);
